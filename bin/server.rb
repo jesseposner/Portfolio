@@ -34,6 +34,6 @@ end.to_app
 
 Rack::Server.start(
   app: app,
-  Host: 0.0.0.0,
+  Host: '0.0.0.0',
   Port: $PORT
 )
