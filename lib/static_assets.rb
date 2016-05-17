@@ -12,8 +12,6 @@ class StaticAssets
     else
       res = @app.call(env)
     end
-
-    res
   end
 
   private
@@ -26,8 +24,14 @@ class StaticAssets
       content_type = "text/css"
     when ".jpg"
       content_type = "image/jpeg"
+    when ".svg"
+      content_type = "image/svg+xml"
     when ".js"
       content_type = "application/javascript"
+    when ".woff"
+      content_type = "application/font-woff"
+    when ".woff2"
+      content_type = "application/font-woff2"
     end
 
     res["Content-type"] = content_type
