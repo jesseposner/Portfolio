@@ -1,39 +1,38 @@
 class StaticAssets
-  attr_reader :app
-
   def initialize(app)
     @app = app
   end
 
   def call(env)
     req = Rack::Request.new(env)
-    asset_file = req.path[8..-1]
-    if req.path.match(/^\/public/) && asset_file != ""
-      @res = Rack::Response.new
-      render(asset_file)
-      @res.finish
+    file_name = req.path[8..-1]
+
+    if req.path.index("/public")
+      res = build_response(file_name)
     else
-      app.call(env)
+      res = @app.call(env)
     end
+
+    res
   end
 
-  def render(asset_file)
-    file_path =
-      "public/#{asset_file}"
-    file_content = File.read(file_path)
+  private
 
-    case asset_file.split(".").last
-    when "css"
-      render_content(file_content, "text/css")
-    when "jpg"
-      render_content(file_content, "image/jpeg")
-    when "js"
-      render_content(file_content, "application/javascript")
+  def build_response(file_name)
+    res = Rack::Response.new
+
+    case File.extname(file_name)
+    when ".css"
+      content_type = "text/css"
+    when ".jpg"
+      content_type = "image/jpeg"
+    when ".js"
+      content_type = "application/javascript"
     end
-  end
 
-  def render_content(content, content_type)
-    @res['Content-Type'] = content_type
-    @res.write(content)
+    res["Content-type"] = content_type
+    res.write(File.read("public/#{file_name}"))
+
+    res
   end
 end
