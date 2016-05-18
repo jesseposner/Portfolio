@@ -24,6 +24,8 @@ class StaticAssets
       content_type = "text/css"
     when ".jpg"
       content_type = "image/jpeg"
+    when ".png"
+      content_type = "image/png"
     when ".svg"
       content_type = "image/svg+xml"
     when ".js"
