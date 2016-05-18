@@ -1,8 +1,33 @@
 ul.tech-list {
   display: flex;
   flex-wrap: wrap;
+  padding: 0px;
+  margin: 0px;
+  justify-content: center;
 }
 
 ul.tech-list li {
   list-style: none;
+  padding: 10px;
+  text-align: center;
+}
+
+ul.tech-list li img {
+  height: 120px;
+}
+
+section.tech-section {
+  width: 100%;
+  padding: 20px;
+  margin: 0px;
+}
+
+.tech-section h1 {
+  text-align: center;
+}
+
+@media screen and (min-width: 800px) {
+  ul.tech-list li {
+    width: calc(100% * (1/5));
+  }
 }
