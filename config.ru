@@ -1,5 +1,4 @@
 require_relative './lib/controller_base'
-require_relative './lib/router'
 require_relative './lib/exceptions'
 require_relative './lib/static_assets'
 
